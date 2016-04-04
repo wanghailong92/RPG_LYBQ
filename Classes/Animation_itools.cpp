@@ -32,7 +32,7 @@ Animation* Animation_itools::makeAnimationfromPlist(std::string plist_filename,c
 Animation* Animation_itools::makeAnimationfrommixpicture(std::string filename,int x,int y,int x_begin,int y_begin,int x_end,int y_end,float speed,bool Original,int Loop){
     //获取整张2D图片的纹理
     //x-列，y-行
-    Texture2D*texture=TextureCache::getInstance()->addImage(filename);
+    Texture2D*texture=Director::getInstance()->getTextureCache()->addImage(filename);
     float eatch_width=texture->getContentSize().width/x;
     float eatch_height=texture->getContentSize().height/y;
   
@@ -76,20 +76,12 @@ Animation* Animation_itools::makeAnimationfromVector(std::vector<std::string> ve
 
 
  std::vector<std::string> Animation_itools::load_mssage(const char *txtfilename,std::vector<std::string> obj){
-     //std::string fullpath=FileUtils::getInstance()->fullPathForFilename(txtfilename);
      unsigned long bufferSize=0;
      unsigned char* p=NULL;
      
      std::string fullpath=FileUtils::getInstance()->fullPathForFilename(txtfilename);
      auto data=FileUtils::getInstance()->getDataFromFile(fullpath.c_str());
      p=data.getBytes();
-//    FILE*fp=fopen(fullpath.c_str(), "r");
-//    fseek(fp,0,SEEK_END);
-//    int len=ftell(fp);
-//    char*p=new char[len+1];
-//    memset(p, 0, len+1);
-//    fseek(fp, 0, SEEK_SET);
-//    fread(p,1, len, fp);
      std::string temp;
      int i=0;
     while (p[i]!='$') {
